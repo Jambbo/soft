@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.exception.InterruptOperationException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,16 +12,19 @@ public class ConsoleHelper {
     public static void writeMessage(String message){
         System.out.println(message);
     }
-    public static String readString() {
+    public static String readString()throws InterruptOperationException{
             try{
                 String text = bis.readLine();
+                if("exit".equals(text.trim().toLowerCase())){
+                    throw new InterruptOperationException();
+                }
                 return text;
             }catch(Exception e){
                 e.printStackTrace();
             }
             return null;
     }
-    public static String askCurrencyCode(){
+    public static String askCurrencyCode() throws InterruptOperationException {
         while(true){
             ConsoleHelper.writeMessage("Please choose a currency code: ");
             String currencyCode = ConsoleHelper.readString();
@@ -30,7 +35,7 @@ public class ConsoleHelper {
             return currencyCode.trim().toUpperCase();
         }
     }
-    public static String[] getValidTwoDigits(String currencyCode){
+    public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
         while(true){
             ConsoleHelper.writeMessage("Please enter 2 positive numbers(1st - denomination, 2nd - count");
             String s = ConsoleHelper.readString();
@@ -54,7 +59,7 @@ public class ConsoleHelper {
             return split;
         }
     }
-    public static Operation askOperaion() {
+    public static Operation askOperaion()throws InterruptOperationException {
         while (true) {
                 ConsoleHelper.writeMessage("What operation do you want to perform?\n" +
                         "\t1 - INFO\n\t2 - DEPOSIT\n\t3 - WITHDRAW\n\t4 - EXIT");

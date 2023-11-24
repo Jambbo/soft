@@ -1,6 +1,7 @@
 package org.example.command;
 
 import org.example.Operation;
+import org.example.exception.InterruptOperationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class CommandExecutor {
         allKnownCommandsMap.put(Operation.WITHDRAW,new WithdrawCommand());
         allKnownCommandsMap.put(Operation.EXIT,new ExitCommand());
     }
-    public static final void execute (Operation operation){
+    public static final void execute (Operation operation) throws InterruptOperationException {
         allKnownCommandsMap.get(operation).execute();
     }
     private CommandExecutor(){}

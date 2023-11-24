@@ -35,4 +35,12 @@ public class CurrencyManipulator {
     public boolean hasMoney(){
         return !denominations.isEmpty();
     }
+    public boolean isAmountAvailable(int expectedAmount){
+        return expectedAmount<=getTotalAmount();
+    }
+    public Map<Integer,Integer> withdrawAmount(int expectedAmount){
+        int sum = expectedAmount;
+            Map<Integer,Integer> map = new HashMap<>(denominations);
+            return map; //not finished
+    }
 }

@@ -1,5 +1,7 @@
 package org.example.command;
 
- interface Command {
-     void execute();
+import org.example.exception.InterruptOperationException;
+
+interface Command {
+     void execute() throws InterruptOperationException;
 }
